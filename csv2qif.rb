@@ -55,7 +55,7 @@ bank_file = File.read(file_path).force_encoding('utf-8')
 bank_file = CSV.parse(bank_file, col_sep: acc_cfg[:col_sep].nil? ? config[:col_sep] : acc_cfg[:col_sep])
 
 
-Qif::Writer.open(output_file, type = acc_cfg[:type], format = acc_cfg[:date_fmt]) do |qif|
+Qif::Writer.open(output_file, type = acc_cfg[:type], format = acc_cfg[:date_fmt].nil? config[:date_fmt] : acc_cfg[:date_fmt]) do |qif|
   # Uncomment this when https://github.com/jemmyw/Qif/pull/13 is merged.
   #qif << Qif::Account.new(
   #  :name         => acc_cfg[:name],

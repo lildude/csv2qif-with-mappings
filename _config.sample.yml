@@ -2,10 +2,16 @@
 #
 # Use this file to define the format of the CSV file you're passing in and
 # define mappings of strings to replace in the final .qif file.
+#
+# Global settings
+date_fmt: 'dd/mm/yyyy'  # Date format for QIF file
+col_sep: ','
+
+# Account-specific settings. These take precidence over global settings.
 accounts:
   BigBank_Current:
-    col_sep: ','            # Column seperator if your CSV file doesn't use commas
     type:   'Bank'          # They type of account for the QIF file.
+    col_sep: ','            # Column seperator if your CSV file doesn't use commas
     date_fmt: 'dd/mm/yyyy'  # Date format for QIF file
     # Mapping of CSV fields to QIF fields. Each field's position in the CSV is
     # mapped to the equivalent QIF field.
