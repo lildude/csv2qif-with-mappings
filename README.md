@@ -10,7 +10,6 @@ Along with basic CSV-2-QIF conversion, you can also map commonly used names and 
 
 ```
 git clone https://github.com/lildude/csv2qif-with-mappings.git
-bundle install
 ```
 
 ## Usage
