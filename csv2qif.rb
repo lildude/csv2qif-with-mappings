@@ -5,11 +5,6 @@ require 'qif'
 require 'csv'
 require 'yaml'
 
-account = ARGV[0].to_sym
-file_path = ARGV[1]
-
-output_file = File.basename(file_path).sub!('csv', 'qif')
-
 # Recursively convert key strings in the YAML to symbols
 def symbolize_keys(hash)
   hash.inject({}) do |result, (key, value)|
@@ -45,17 +40,20 @@ def calculate_amount(row, acc_cfg)
   end
 end
 
+account = ARGV[0].to_sym
+file_path = ARGV[1]
+output_file = File.basename(file_path).sub!('csv', 'qif')
+
 # Read in configuration yaml file
 config = symbolize_keys(YAML.load_file('_config.yml'))
-
+# Grab account-specific config for easy ref later
 acc_cfg = config[:accounts][account]
 
 # Read in the csv file
 bank_file = File.read(file_path).force_encoding('utf-8')
 bank_file = CSV.parse(bank_file, col_sep: acc_cfg[:col_sep].nil? ? config[:col_sep] : acc_cfg[:col_sep])
 
-
-Qif::Writer.open(output_file, type = acc_cfg[:type], format = acc_cfg[:date_fmt].nil? config[:date_fmt] : acc_cfg[:date_fmt]) do |qif|
+Qif::Writer.open(output_file, type = acc_cfg[:type], format = acc_cfg[:date_fmt].nil? ? config[:date_fmt] : acc_cfg[:date_fmt]) do |qif|
   # Uncomment this when https://github.com/jemmyw/Qif/pull/13 is merged.
   #qif << Qif::Account.new(
   #  :name         => acc_cfg[:name],
@@ -68,7 +66,6 @@ Qif::Writer.open(output_file, type = acc_cfg[:type], format = acc_cfg[:date_fmt]
   bank_file.each do |row|
     next if ( row.empty? || row[0] == "Date" )  # Assumes the CSV file header line starts with "Date"
     row.each { |value| value.to_s.gsub!(/^\s+|\s+$/,'') }
-    date = row[0].split("/").reverse.join("/")
     qif << Qif::Transaction.new(
       :date               => row[acc_cfg[:csv_field_map][:date]],
       :amount             => calculate_amount(row, acc_cfg),
