@@ -1,0 +1,33 @@
+# Configuration file for csv2qif-with-mappings
+#
+# Use this file to define the format of the CSV file you're passing in and
+# define mappings of strings to replace in the final .qif file.
+accounts:
+  BigBank_Current:
+    col_sep: ','            # Column seperator if your CSV file doesn't use commas
+    type:   'Bank'          # They type of account for the QIF file.
+    date_fmt: 'dd/mm/yyyy'  # Date format for QIF file
+    # Mapping of CSV fields to QIF fields. Each field's position in the CSV is
+    # mapped to the equivalent QIF field.
+    # See http://www.rubydoc.info/github/jemmyw/Qif/Qif/Transaction for supported
+    # fields.
+    csv_field_map:
+      date:
+      payee:
+      number:
+      amount:
+      amount_in:
+      amount_out:
+      status:
+      memo:
+      adress:
+      category:
+      split_category:
+      split_amount:
+      split_memo:
+    # Use this to map account-specific "numbers" to your own custom types or values
+    number_map:
+    # Use this to map account-specific payees to your own friendly names
+    payee_map:
+    # Use this to map account-specific categories to your own friendly names
+    category_map:
