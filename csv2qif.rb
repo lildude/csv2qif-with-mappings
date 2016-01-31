@@ -52,7 +52,7 @@ acc_cfg = config[:accounts][account]
 
 # Read in the csv file
 bank_file = File.read(file_path).force_encoding('utf-8')
-bank_file = CSV.parse(bank_file, col_sep: acc_cfg[:col_sep])
+bank_file = CSV.parse(bank_file, col_sep: acc_cfg[:col_sep].nil? ? config[:col_sep] : acc_cfg[:col_sep])
 
 
 Qif::Writer.open(output_file, type = acc_cfg[:type], format = acc_cfg[:date_fmt]) do |qif|
