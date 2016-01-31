@@ -9,7 +9,7 @@ Along with basic CSV-2-QIF conversion, you can also map commonly used names and 
 ## Installation
 
 ```
-git clone
+git clone https://github.com/lildude/csv2qif-with-mappings.git
 bundle install
 ```
 
@@ -23,6 +23,6 @@ This will save the `.qif` file to the current directory with the same name as th
 
 ## Configuration
 
-Add accounts and configure your CSV fields to QIF fields in the `_config.yml` file.
+Copy `_config.sample.yml` to `_config.yml` in the directory you cloned the repository into and add accounts and configure your CSV fields to QIF fields.
 
 If you want to do fancy entry rewriting, add those too.
