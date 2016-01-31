@@ -1,0 +1,3 @@
+# Ignore all .qif and .csv files
+*.qif
+*.csv
