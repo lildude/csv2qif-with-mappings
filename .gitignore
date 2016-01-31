@@ -1,3 +1,6 @@
 # Ignore all .qif and .csv files
 *.qif
 *.csv
+
+# Ignore configured _config.yml - we don't want to accidentally leak private info
+_config.yml
