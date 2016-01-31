@@ -17,6 +17,8 @@ accounts:
     # mapped to the equivalent QIF field.
     # See http://www.rubydoc.info/github/jemmyw/Qif/Qif/Transaction for supported
     # fields.
+    #
+    # Empty fields are ignored.
     csv_field_map:
       date:
       payee:
